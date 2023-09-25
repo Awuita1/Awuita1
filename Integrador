@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdbool.h>
+#string <string.h>
 
 //Constantes
 cons int num_digits = 5;
@@ -41,8 +42,18 @@ printf("El juego consiste en adivinar un número de %d cifras. Tienes %d intento
 return 0;
 }
 void inicio{
-   Printf("Porfavor ingrese su nombre");
-   scanf("%c",name);
-   printf("LA CIFRA DEL DIA \n Bienvenido %c\n El juego consiste en adivinar un número aleatorio de %d cifras. Tienes %d intentos.\n", name, num_digits, max_attempts");
-   printf("REGLAS:\n -Tienes 10 intentos para adivinar el numero del dia.\n-Si ingresas un numero y alguna de las cifras es correcta y esta bien ubicada, sera marcada con un 'v'.\n-Si alguna cifra esta correcta pero mal ubicada se marcara con un '-'\n-Si el numero es incorrecto se marcara con un 'x'..");
+   char resp[2];
+   do {
+      Printf("Porfavor ingrese su nombre");
+      scanf("%c",name);
+      printf("LA CIFRA DEL DIA \n Bienvenido %c\n El juego consiste en adivinar un número aleatorio de %d cifras. Tienes %d intentos.\n", name, num_digits, max_attempts");
+      printf("REGLAS:\n -Tienes 10 intentos para adivinar el numero del dia.\n-Si ingresas un numero y alguna de las cifras es correcta y esta bien ubicada, sera marcada con un 'v'.\n-Si alguna cifra esta correcta pero mal ubicada se marcara con un '-'\n-Si el numero es incorrecto se marcara con un 'x'..");
+      printf("Para inicar el juego ingrese escriba 'go'")
+      scanf("%c",resp);
+      if (strcmp(resp, "go") == 0){
+         break;
+      }
+         
+   } while (1);
 }
+
