@@ -6,7 +6,11 @@
 cons int num_digits = 5;
 cons int max_attempts = 10;
 
-
-
+//Registro del jugador
+typedef struct {
+   char name[50]; 
+   int min_attempts;
+   int time;
+} Player;
 
 int main() { 
