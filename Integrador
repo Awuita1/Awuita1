@@ -5,3 +5,8 @@
 //Constantes
 cons int num_digits = 5;
 cons int max_attempts = 10;
+
+
+
+
+int main() { 
