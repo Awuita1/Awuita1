@@ -13,4 +13,9 @@ typedef struct {
    int time;
 } Player;
 
+//Funcion para comparar numeros, e indicar las cifras correctas
+
+
+//Programa principal
 int main() { 
+srand(time(NULL));
