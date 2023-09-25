@@ -18,4 +18,8 @@ typedef struct {
 
 //Programa principal
 int main() { 
-srand(time(NULL));
+srand(time(NULL)); //Generar numeros aleatorios
+
+
+printf("Bienvenido a La Cifra Numerica Del Dia\n");
+printf("El juego consiste en adivinar un número de %d cifras. Tienes %d intentos.\n", num_digits, max_attempts);
