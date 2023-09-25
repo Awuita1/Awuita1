@@ -2,4 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define
+//Constantes
+cons int num_digits = 5;
+cons int max_attempts = 10;
