@@ -2,24 +2,31 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdbool.h>
-#string <string.h>
+#include <string.h>
+
+//notas: si un comentario tiene un ":p" significa que hay que borrarlo para la version final.
+//por ahora en el subprograma "juego" va a haber unos comentarios que terminen con (start-end) esas son los subprocesos que hicieron, simplemente estan para marcar que son lo mas nuevo del codigo
+// el formato que use fue:
+//{nombre del programa} start
+//{cuerpo del programa}
+//{nombre del programa} end
 
 //Constantes
 const int num_digits = 5;
 const int max_attempts = 10;
 
 //Registro del jugador
-typedef struct {
+struct player {
    char name[50]; 
    int min_attempts;
    int time;
-} Player;
-
-//Subprograma del juego
-void juego();
+} ;
 
 //Subprograma del menu de inicio
-void start();
+void start(struct player *reg);
+
+//Subprograma del juego
+void juego(int numeros [],int numeros_j []); //
 
 //Subprograma del menu de fin de juego
 void end();
@@ -27,33 +34,101 @@ void end();
 //Subprograma de los record
 void record();
 
-//Funcion para comparar numeros, e indicar las cifras correctas
+//CLearScreen
+void erase();
 
 
 //Programa principal
 int main() { 
-srand(time(NULL)); //Generar numeros aleatorios
+   int numero_del_jugador[5];
+   int array_numeros[5];
+   srand(time(NULL)); //Generar numeros aleatorios
+   struct player current_player;
 
-
-printf("Bienvenido a La Cifra Numerica Del Dia\n");
-printf("El juego consiste en adivinar un número de %d cifras. Tienes %d intentos.\n", num_digits, max_attempts);
-
-
-return 0;
+   start(&current_player);
+   erase();
+   return 0;
+   juego();
 }
-void inicio{
-   char resp[2];
+
+
+void start (struct player *reg){
+   char resp[10];
+   bool on = true;
+
+   printf("Porfavor, ingresa tu nombre: ");
+   scanf("%s", reg->name);
    do {
-      Printf("Porfavor ingrese su nombre");
-      scanf("%c",name);
-      printf("LA CIFRA DEL DIA \n Bienvenido %c\n El juego consiste en adivinar un número aleatorio de %d cifras. Tienes %d intentos.\n", name, num_digits, max_attempts");
-      printf("REGLAS:\n -Tienes 10 intentos para adivinar el numero del dia.\n-Si ingresas un numero y alguna de las cifras es correcta y esta bien ubicada, sera marcada con un 'v'.\n-Si alguna cifra esta correcta pero mal ubicada se marcara con un '-'\n-Si el numero es incorrecto se marcara con un 'x'..");
-      printf("Para inicar el juego ingrese escriba 'go'")
-      scanf("%c",resp);
+      printf("LA CIFRA DEL DIA \n Bienvenido %s\n El juego consiste en adivinar un número aleatorio de %d cifras. Tienes %d intentos.\n", reg->name, num_digits, max_attempts);
+      printf("REGLAS:\n -Tienes 10 intentos para adivinar el numero del dia.\n-Si ingresas un numero y alguna de las cifras es correcta y esta bien ubicada, sera marcada con un 'v'.\n-Si alguna cifra esta correcta pero mal ubicada se marcara con un '-'\n-Si el numero es incorrecto se marcara con un 'x'.");
+      printf("Para inicar el juego ingrese escriba 'go'\n");
+      scanf("%s",resp);
       if (strcmp(resp, "go") == 0){
-         break;
+         on = false;
       }
          
-   } while (1);
+   } while (on);
 }
 
+void erase(){
+   printf("\033[2J"); // Borra la pantalla
+   printf("\033[H");  // Mueve el cursor al principio
+}
+
+void juego(int numeros [],int numeros_j []) {
+   //genero un num aleatorio start
+   int numero_aleatorio, contador = 0, repetido = 0; 
+
+   while (i < 5)
+   {
+      numero_aleatorio = rand() % 10;  // Genera un número aleatorio entre 0 y 9
+      repetido = 0;
+
+
+      // Verifica si el número ya existe en el array
+      for (int j = 0; j < contador; j++) 
+      {
+         if (numeros[j] == numero_aleatorio) {
+         repetido = 1;
+         break;  
+         }
+      }
+
+      // Si no es un número repetido, guárdalo en el array
+      if (repetido==0) {
+      numeros [contador] = numero_aleatorio;
+      contador++;
+      }
+   
+    }
+   //genero un num aleatorio end
+
+   //genero num del jugador start
+    int numeros_del_jugador, 
+        dato_correcto=1,
+        digito=0,
+        numeros_del_jugador_array [5];
+
+    //Este "while" lee lo que ingresa el usuario, y verifica que sea valido el dato
+    while (dato_correcto == 1) 
+    {
+      printf ("\n\nIngrese un numeros: ");
+      scanf ("%d", &numeros_del_jugador);
+
+      if (numeros_del_jugador > 99999 || numeros_del_jugador < 0){
+         printf ("\n\nEl numero ingresado no es valido!");
+      }
+      else{
+         dato_correcto = 0;
+      }
+   }
+
+   //Este "for" guarda el dato en un array
+   for (int i = 5; i > 0; i--)
+   {
+      digito = numeros_del_jugador % 10;  // Obtener el último dígito del número
+      numeros_del_jugador_array[i] = digito;  // Construir el número al revés
+      numeros_del_jugador = numeros_del_jugador / 10;  // Eliminar el último dígito del número original
+   }
+   //genero num del jugador end
+}
