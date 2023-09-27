@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include <string.h>
 
+//Backup fecha 27/09 14:25
+
 //notas: si un comentario tiene un ":p" significa que hay que borrarlo para la version final.
 //por ahora en el subprograma "juego" va a haber unos comentarios que terminen con (start-end) esas son los subprocesos que hicieron, simplemente estan para marcar que son lo mas nuevo del codigo
 // el formato que use fue:
