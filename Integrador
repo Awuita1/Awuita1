@@ -5,8 +5,8 @@
 #string <string.h>
 
 //Constantes
-cons int num_digits = 5;
-cons int max_attempts = 10;
+const int num_digits = 5;
+const int max_attempts = 10;
 
 //Registro del jugador
 typedef struct {
