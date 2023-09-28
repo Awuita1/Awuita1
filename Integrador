@@ -9,13 +9,19 @@
 //Constantes
 const int num_digits = 5;
 const int max_attempts = 10;
+const int max_players = 10;
 
-//Registro del jugador
-struct player {
-   char name[50]; 
-   int min_attempts;
-   int time;
-} ;
+// Estructura para el jugador
+struct Player {
+    char name[50];
+    int score; // Puntuación del jugador
+};
+
+// Arreglo de jugadores para el ranking
+struct Player ranking[MAX_PLAYERS];
+
+// Variable para llevar el número actual de jugadores en el ranking
+int num_players = 0;
 
 //Subprograma del menu de inicio
 void start(struct player *reg);
@@ -33,6 +39,11 @@ void record();
 
 //CLearScreen
 void erase();
+
+// Función para actualizar el ranking
+void updateRanking(struct Player player);
+// // Función para mostrar el ranking
+void showRanking();
 
 
 //Programa principal
@@ -133,4 +144,34 @@ void juego(int ran[], int pInput[]) {
         printf("\n");
     }
     //comparacion end
+}
+void updateRanking(struct Player player) {
+    // Si el arreglo de ranking aún no está lleno, agrega al jugador directamente
+    if (num_players < MAX_PLAYERS) {
+        ranking[num_players] = player;
+        num_players++;
+    } else {
+        // Si el arreglo de ranking está lleno, verifica si el jugador tiene una puntuación más alta que los actuales
+        for (int i = 0; i < MAX_PLAYERS; i++) {
+            if (player.score > ranking[i].score) {
+                // Desplaza a los jugadores con una puntuación más baja hacia abajo
+                for (int j = MAX_PLAYERS - 1; j > i; j--) {
+                    ranking[j] = ranking[j - 1];
+                }
+                // Agrega al jugador en la posición i
+                ranking[i] = player;
+                break;
+            }
+        }
+    }
+}
+
+void showRanking() {
+    printf("\n--- RANKING DE JUGADORES ---\n");
+    printf("Nombre\tPuntuación\n");
+
+    for (int i = 0; i < num_players; i++) {
+        printf("%s\t%d\n", ranking[i].name, ranking[i].score);
+    }
+    printf("\n");
 }
